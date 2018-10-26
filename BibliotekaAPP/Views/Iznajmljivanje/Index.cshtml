@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BibliotekaAPP.Models.Iznajmljivanje>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<body style="background-image:url(https://findingtimetowrite.files.wordpress.com/2016/06/houseontherockwisconsin.jpg)">
+    <h2 style="font-family:fantasy; color:white">Evidencija iznajmljenih knjiga</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table" style="background-image:url(https://www.incimages.com/uploaded_files/image/970x450/getty_496612468_2000138820009280460_336567.jpg); border:double">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DatumIznajmljivanja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Knjige.Naslov)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Korisnici.Ime)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DatumIznajmljivanja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Knjige.Naslov)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Korisnici.Ime)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IznajmljivanjeID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IznajmljivanjeID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IznajmljivanjeID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</body>

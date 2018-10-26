@@ -1,0 +1,50 @@
+﻿@model BibliotekaAPP.Models.Iznajmljivanje
+
+@{
+    ViewBag.Title = "Delete";
+}
+<body style="background-image:url(https://findingtimetowrite.files.wordpress.com/2016/06/houseontherockwisconsin.jpg);  color:white">
+    <h2>Brisanje</h2>
+
+    <h3>Da li ste sigurni da zelite da obrisete?</h3>
+    <div>
+     
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.DatumIznajmljivanja)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DatumIznajmljivanja)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Knjige.Naslov)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Knjige.Naslov)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Korisnici.Ime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Korisnici.Ime)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+    </body>

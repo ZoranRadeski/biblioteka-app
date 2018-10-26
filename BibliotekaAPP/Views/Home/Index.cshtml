@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<body style="background-image:url(https://findingtimetowrite.files.wordpress.com/2016/06/houseontherockwisconsin.jpg)">
+
+    <div class="jumbotron" style="background-image:url(http://belov.cz/knihovna/wp-content/uploads/2015-01-05-3.jpg);border:solid; position:unset">
+        <h1 style="color:white; font-family:fantasy">Biblioteka </h1>
+        <p style="color:white; font-family:fantasy">-Ova aplikacija vam omogucava vodjenje evidencije o iznajmljenim knjigama, kao i kreiranje i izmenu podataka o novim korisnicima.</p>
+
+    </div>
+
+    <div class="row" style="background-image:url(http://belov.cz/knihovna/wp-content/uploads/2015-01-05-3.jpg);border:solid; color:white">
+        <div class="col-md-4" style="border:solid">
+            <h2 style="font-family:fantasy">@Html.ActionLink("Korisnici", "Index", "Korisnici")</h2>
+
+        </div>
+        <div class="col-md-4" style="border:solid">
+            <h2 style="font-family:fantasy">@Html.ActionLink("Knjige", "Index", "Knjige")</h2>
+
+
+        </div>
+        <div class="col-md-4" style="border:solid">
+            <h2 style="font-family:fantasy">@Html.ActionLink("Iznajmljivanje", "Index", "Iznajmljivanje")</h2>
+
+
+        </div>
+    </div>
+
+
+</body>

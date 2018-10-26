@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BibliotekaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Iznajmljivanje">
+          <Key>
+            <PropertyRef Name="IznajmljivanjeID" />
+          </Key>
+          <Property Name="IznajmljivanjeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KorisnikID" Type="int" Nullable="false" />
+          <Property Name="KnjigaID" Type="int" Nullable="false" />
+          <Property Name="DatumIznajmljivanja" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Knjige">
+          <Key>
+            <PropertyRef Name="KnjigaID" />
+          </Key>
+          <Property Name="KnjigaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naslov" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pisac" Type="nvarchar" MaxLength="50" />
+          <Property Name="Kategorija" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Korisnici">
+          <Key>
+            <PropertyRef Name="KorisnikID" />
+          </Key>
+          <Property Name="KorisnikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="50" />
+          <Property Name="Prezime" Type="nvarchar" MaxLength="50" />
+          <Property Name="BrojTelefona" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Iznajmljivanje_Knjige">
+          <End Role="Knjige" Type="Self.Knjige" Multiplicity="1" />
+          <End Role="Iznajmljivanje" Type="Self.Iznajmljivanje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Knjige">
+              <PropertyRef Name="KnjigaID" />
+            </Principal>
+            <Dependent Role="Iznajmljivanje">
+              <PropertyRef Name="KnjigaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Iznajmljivanje_Korisnici">
+          <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="1" />
+          <End Role="Iznajmljivanje" Type="Self.Iznajmljivanje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnici">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="Iznajmljivanje">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BibliotekaDBModelStoreContainer">
+          <EntitySet Name="Iznajmljivanje" EntityType="Self.Iznajmljivanje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Knjige" EntityType="Self.Knjige" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Korisnici" EntityType="Self.Korisnici" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Iznajmljivanje_Knjige" Association="Self.FK_Iznajmljivanje_Knjige">
+            <End Role="Knjige" EntitySet="Knjige" />
+            <End Role="Iznajmljivanje" EntitySet="Iznajmljivanje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Iznajmljivanje_Korisnici" Association="Self.FK_Iznajmljivanje_Korisnici">
+            <End Role="Korisnici" EntitySet="Korisnici" />
+            <End Role="Iznajmljivanje" EntitySet="Iznajmljivanje" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BibliotekaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Iznajmljivanje">
+          <Key>
+            <PropertyRef Name="IznajmljivanjeID" />
+          </Key>
+          <Property Name="IznajmljivanjeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KorisnikID" Type="Int32" Nullable="false" />
+          <Property Name="KnjigaID" Type="Int32" Nullable="false" />
+          <Property Name="DatumIznajmljivanja" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Knjige" Relationship="Self.FK_Iznajmljivanje_Knjige" FromRole="Iznajmljivanje" ToRole="Knjige" />
+          <NavigationProperty Name="Korisnici" Relationship="Self.FK_Iznajmljivanje_Korisnici" FromRole="Iznajmljivanje" ToRole="Korisnici" />
+        </EntityType>
+        <EntityType Name="Knjige">
+          <Key>
+            <PropertyRef Name="KnjigaID" />
+          </Key>
+          <Property Name="KnjigaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naslov" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pisac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kategorija" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Iznajmljivanjes" Relationship="Self.FK_Iznajmljivanje_Knjige" FromRole="Knjige" ToRole="Iznajmljivanje" />
+        </EntityType>
+        <EntityType Name="Korisnici">
+          <Key>
+            <PropertyRef Name="KorisnikID" />
+          </Key>
+          <Property Name="KorisnikID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BrojTelefona" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Iznajmljivanjes" Relationship="Self.FK_Iznajmljivanje_Korisnici" FromRole="Korisnici" ToRole="Iznajmljivanje" />
+        </EntityType>
+        <Association Name="FK_Iznajmljivanje_Knjige">
+          <End Role="Knjige" Type="Self.Knjige" Multiplicity="1" />
+          <End Role="Iznajmljivanje" Type="Self.Iznajmljivanje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Knjige">
+              <PropertyRef Name="KnjigaID" />
+            </Principal>
+            <Dependent Role="Iznajmljivanje">
+              <PropertyRef Name="KnjigaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Iznajmljivanje_Korisnici">
+          <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="1" />
+          <End Role="Iznajmljivanje" Type="Self.Iznajmljivanje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnici">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="Iznajmljivanje">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BibliotekaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Iznajmljivanjes" EntityType="Self.Iznajmljivanje" />
+          <EntitySet Name="Knjiges" EntityType="Self.Knjige" />
+          <EntitySet Name="Korisnicis" EntityType="Self.Korisnici" />
+          <AssociationSet Name="FK_Iznajmljivanje_Knjige" Association="Self.FK_Iznajmljivanje_Knjige">
+            <End Role="Knjige" EntitySet="Knjiges" />
+            <End Role="Iznajmljivanje" EntitySet="Iznajmljivanjes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Iznajmljivanje_Korisnici" Association="Self.FK_Iznajmljivanje_Korisnici">
+            <End Role="Korisnici" EntitySet="Korisnicis" />
+            <End Role="Iznajmljivanje" EntitySet="Iznajmljivanjes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BibliotekaDBModelStoreContainer" CdmEntityContainer="BibliotekaDBEntities">
+          <EntitySetMapping Name="Iznajmljivanjes">
+            <EntityTypeMapping TypeName="BibliotekaDBModel.Iznajmljivanje">
+              <MappingFragment StoreEntitySet="Iznajmljivanje">
+                <ScalarProperty Name="IznajmljivanjeID" ColumnName="IznajmljivanjeID" />
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+                <ScalarProperty Name="KnjigaID" ColumnName="KnjigaID" />
+                <ScalarProperty Name="DatumIznajmljivanja" ColumnName="DatumIznajmljivanja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Knjiges">
+            <EntityTypeMapping TypeName="BibliotekaDBModel.Knjige">
+              <MappingFragment StoreEntitySet="Knjige">
+                <ScalarProperty Name="KnjigaID" ColumnName="KnjigaID" />
+                <ScalarProperty Name="Naslov" ColumnName="Naslov" />
+                <ScalarProperty Name="Pisac" ColumnName="Pisac" />
+                <ScalarProperty Name="Kategorija" ColumnName="Kategorija" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Korisnicis">
+            <EntityTypeMapping TypeName="BibliotekaDBModel.Korisnici">
+              <MappingFragment StoreEntitySet="Korisnici">
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="BrojTelefona" ColumnName="BrojTelefona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

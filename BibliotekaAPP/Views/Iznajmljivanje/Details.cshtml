@@ -1,0 +1,43 @@
+﻿@model BibliotekaAPP.Models.Iznajmljivanje
+
+@{
+    ViewBag.Title = "Details";
+}
+<body style="background-image:url(https://findingtimetowrite.files.wordpress.com/2016/06/houseontherockwisconsin.jpg);  color:white">
+    <h2>Detalji o iznajmljenom delu:</h2>
+
+    <div>
+    
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.DatumIznajmljivanja)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DatumIznajmljivanja)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Knjige.Naslov)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Knjige.Naslov)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Korisnici.Ime)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Korisnici.Ime)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.IznajmljivanjeID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    </body>

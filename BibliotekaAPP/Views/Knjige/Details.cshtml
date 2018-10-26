@@ -1,0 +1,45 @@
+﻿@model BibliotekaAPP.Models.Knjige
+
+@{
+    ViewBag.Title = "Details";
+}
+<body style="background-image:url(https://findingtimetowrite.files.wordpress.com/2016/06/houseontherockwisconsin.jpg);  color:white">
+    <h2>Detalji izabranog dela</h2>
+
+    <div>
+        <h4>Knjige</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Naslov)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Naslov)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Pisac)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Pisac)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Kategorija)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Kategorija)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.KnjigaID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    </body>
+
+

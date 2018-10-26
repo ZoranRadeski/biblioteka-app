@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BibliotekaAPP.Models.Knjige>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 style="color:white; font-family:fantasy">Spisak knjiga</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<body style="background-image:url(https://findingtimetowrite.files.wordpress.com/2016/06/houseontherockwisconsin.jpg)">
+    <table class="table" style="background-image:url(https://www.incimages.com/uploaded_files/image/970x450/getty_496612468_2000138820009280460_336567.jpg)">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naslov)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pisac)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kategorija)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Naslov)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pisac)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kategorija)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.KnjigaID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.KnjigaID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.KnjigaID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
